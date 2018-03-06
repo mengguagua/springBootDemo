@@ -1,0 +1,53 @@
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <meta content="text/html;charset=UTF-8"/>
+    <meta http-equiv="x-ua-compatible" content="IE=edge"/>
+    <meta name="viewport" content="width=device-width, initial-scale=1"/>
+    <title>thymeleaf</title>
+    <link th:href="@{bootstrap_3/css/bootstrap.min.css}" rel="stylesheet"/>
+    <link th:href="@{bootstrap_3/css/bootstrap-theme.min.css}" rel="stylesheet"/>
+
+
+</head>
+<body>
+
+    <div class="panel panel-primary">
+        <div class="panel-heading">
+            <h3 class="panel-title">访问人</h3>
+        </div>
+        <div class="panel-body">
+            <span th:text="${singlePerson.name}"></span>
+        </div>
+    </div>
+
+    <div th:if="${not #lists.isEmpty(people)}">
+        <div class="panel panel-primary">
+            <div class="panel-heading">
+                <h3 class="panel-title">列表</h3>
+            </div>
+            <div class="panel-body">
+                <ul class="list-group">
+                    <li class="list-group-item" th:each="person:${people}">
+                        <span th:text="${person.name}"></span>
+                        <span th:text="${person.age}"></span>
+                        <button class="btn" th:onclick="'getName(\''+${person.name}+'\');'">获得名字</button>
+                    </li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <script th:src="@{jquery/jquery-3.3.1.min.js}" type="text/javascript"></script>
+    <script th:src="@{bootstrap_3/js/bootstrap.min.js}" type="text/javascript"></script>
+
+    <script th:inline="javascript">
+        var single=[[${singlePerson}]];
+        alert(single.name+"/"+single.age)
+
+        function getName(name) {
+            alert(name)
+        }
+    </script>
+
+</body>
+</html>
